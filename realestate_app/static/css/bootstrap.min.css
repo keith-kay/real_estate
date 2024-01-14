@@ -8292,6 +8292,16 @@ fieldset:disabled .btn {
     color: #58b047 !important
 }
 
+.shadow-example {
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+}
+
 .text-primary-txt {
     color: #58b047 !important
 }
