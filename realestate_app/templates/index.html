@@ -51,8 +51,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
+                        <a href=" {% url 'about_us' %}" class="nav-item nav-link">About</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
                             <div class="dropdown-menu rounded-0 m-0">
@@ -68,7 +68,7 @@
                                 <a href="404.html" class="dropdown-item">404 Error</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="{% url 'contact_us' %}" class="nav-item nav-link">Contact</a>
                     </div>
                 </div>
             </nav>
@@ -765,7 +765,7 @@
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">Quick Links</h5>
-                        <a class="btn btn-link text-white-50" href="">About Us</a>
+                        <a class="btn btn-link text-white-50" href=" {% url 'about_us' %}">About Us</a>
                         <a class="btn btn-link text-white-50" href="">Contact Us</a>
                         <a class="btn btn-link text-white-50" href="">Our Services</a>
                         <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
