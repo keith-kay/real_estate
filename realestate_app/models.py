@@ -32,5 +32,5 @@ class Property(models.Model):
     is_available = models.BooleanField(default=True)
     
     def __str__(self):
-        return self.title 
+        return self.titl+e 
     
