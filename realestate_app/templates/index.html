@@ -81,9 +81,6 @@
             <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
                 <div class="col-md-6 p-5 mt-lg-5">
                     <h1 class="display-5 animated fadeIn mb-4">Home is Where the <span class="text-primary-txt"> Heart Is:</span> Your Journey to Perfect Living Starts Here.</h1>
-                    <p class="animated fadeIn mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet
-                        sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
-                    <a href="" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">Get Started</a>
                 </div>
                 <div class="col-md-6 animated fadeIn">
                     <div class="owl-carousel header-carousel">
@@ -140,7 +137,7 @@
 
 
         <!-- Category Start -->
-        <div class="container-xxl py-5">
+        {% comment %} <div class="container-xxl py-5">
             <div class="container">
                 <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                     <h1 class="mb-3">Property Types</h1>
@@ -173,7 +170,7 @@
         
                 </div>
             </div>
-        </div>
+        </div> {% endcomment %}
         <!-- Category End -->
 
 
@@ -185,10 +182,10 @@
                     <div class="col-lg-6">
                         <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
                             <h1 class="mb-3">Property Listing</h1>
-                            <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit diam justo sed rebum.</p>
+                            <p>Explore the allure of distinctive living in our carefully curated property listings. Each residence is a masterpiece, offering a blend of modern convenience and timeless elegance.</p>
                         </div>
                     </div>
-                    {% comment %} <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+                     {% comment %} <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
                         <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
                             <li class="nav-item me-2">
                                 <a class="btn btn-outline-primary active" data-bs-toggle="pill" href="#tab-1">Featured</a>
@@ -200,37 +197,42 @@
                                 <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-3">For Rent</a>
                             </li>
                         </ul>
-                    </div> {% endcomment %}
+                    </div>  {% endcomment %}
                 </div>
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
                         <div class="row g-4">
-                            {% for property_instance in properties %}
+                            {% for property in properties %}
+                            {% if property.image_set.all %}
+                            {% with first_image=property.image_set.first %}
                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="property-item rounded overflow-hidden">
                                     <div class="position-relative overflow-hidden">
-                                        <a href=""><img class="img-fluid" src="img/property-1.jpg" alt=""></a>
-                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Sell</div>
-                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{ property_instance.property_type }}</div>
+                                        <a href=""><img class="img-fluid"src="{{ first_image.image.url }}" alt="{{ property.title }} Image" style="width:100%; height: 200px;"></a>
+                                        
+                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{ property.property_type }}</div>
                                     </div>
                                     <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3">$12,345</h5>
-                                        <a class="d-block h5 mb-2" href="">{{ property_instance.title }}</a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ property_instance.location }}</p>
+                                        <h5 class="text-primary mb-3">...</h5>
+                                        <a class="d-block h5 mb-2" href="">{{ property.title }}</a>
+                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ property.location }}</p>
+                                        <a href="#" class="bg-primary rounded text-white start-0 top-0 py-1 px-3" style="margin-bottom:3px;">Details</a>
                                     </div>
-                                    <div class="d-flex border-top">
+                                    <div class="d-flex border-top mt-3">
                                         <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>{{ property_instance.size }}</small>
-                                        
+
                                     </div>
                                 </div>
                             </div>
+                            {% endwith %}
+                            {% endif %}
                             {% endfor %}
                             <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
                                 <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
                             </div>
                         </div>
                     </div>
-                    <div id="tab-2" class="tab-pane fade show p-0">
+                    {% comment %} <div id="tab-2" class="tab-pane fade show p-0">
                         <div class="row g-4">
                             <div class="col-lg-4 col-md-6">
                                 <div class="property-item rounded overflow-hidden">
@@ -350,8 +352,8 @@
                                 <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
                             </div>
                         </div>
-                    </div>
-                    <div id="tab-3" class="tab-pane fade show p-0">
+                    </div> {% endcomment %}
+                    {% comment %} <div id="tab-3" class="tab-pane fade show p-0">
                         <div class="row g-4">
                             <div class="col-lg-4 col-md-6">
                                 <div class="property-item rounded overflow-hidden">
@@ -471,7 +473,7 @@
                                 <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
                             </div>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
             </div>
         </div>
@@ -479,7 +481,32 @@
 
 
         <!-- Call to Action Start -->
+
         <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                        <h4 class="mb-4 text-primary">Who are we?</h4>
+                        <h2 class="mb-4"> Dedicated professionals form our team, 
+                            offering reliable full-service solutions to meet your needs.</h2>
+                        <p class="mb-4" style="letter-spacing:1px; font-size:17px">
+                            Riverside Multipurpose Ltd distinguishes itself as a leading figure in the Real Estate industry, providing outstanding service and excellence. <br>The focus is on efficiency, speed, 
+                            and a meticulous concern for customer satisfaction, complemented by diligent monitoring of market dynamics.
+                            <br>This achievement is the outcome of a dedicated workforce, surpassing a considerable number, 
+                            wholeheartedly committed to serving clients of Riverside Multipurpose Ltd with loyalty, impartiality, and credibility, ensuring the fulfillment of their needs.</p> 
+                            
+                            <a class="btn btn-primary py-3 px-5" href="{% url 'about_us' %}" style="background:#292974; transition: background 0.3s;" onmouseover="this.style.background='#58b047'" onmouseout="this.style.background='#292974'">Learn more about us</a>    
+                        </div>
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                        <div class=" position-relative overflow-hidden p-5 pe-0">
+                            <img class="img-fluid shadow-example" src="{%static 'img/handshake.jpg' %}" alt="Icon" style="height: 400px; width:100%; border-radius: 5px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% comment %} <div class="container-xxl py-5">
             <div class="container">
                 <div class="bg-light rounded p-3">
                     <div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
@@ -499,7 +526,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> {% endcomment %}
         <!-- Call to Action End -->
 
 
