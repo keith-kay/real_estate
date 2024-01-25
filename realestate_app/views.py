@@ -24,8 +24,8 @@ def property_list(request):
     properties= Property.objects.all()
     return render(request, 'properties.html', {'properties': properties} )
 
-def property_detail(request, property_id):
-    property_instance = get_object_or_404(Property, id=property_id)
+def property_detail(request, property_title):
+    property_instance = get_object_or_404(Property, title=property_title)
 
     # You can add more context data if needed
     context = {

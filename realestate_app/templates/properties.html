@@ -25,7 +25,7 @@
                 <h5 class="text-primary mb-3">...</h5>
                 <a class="d-block h5 mb-2" href="">{{ property.title }}</a>
                 <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ property.location }}</p>
-                <a href="{% url 'property_detail' property_id=property.id %}" class="bg-primary rounded text-white start-0 top-0 py-1 px-3" style="margin-bottom:3px;">Details</a>
+                <a href="{% url 'property_detail' property_title=property.title %}" class="bg-primary rounded text-white start-0 top-0 py-1 px-3" style="margin-bottom:3px;">Details</a>
             </div>
             <div class="d-flex border-top mt-3">
                 <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>{{ property_instance.size }}</small>

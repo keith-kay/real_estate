@@ -8,7 +8,7 @@ urlpatterns = [
     path("about_us/",views.about_us, name="about_us"),
     path("contact_us/",views.contact_us, name="contact_us"),
     path("property_list/", views.property_list, name="property_list"),
-    path('property_detail/<int:property_id>/', views.property_detail, name='property_detail'),
+    path('property_detail/<str:property_title>/', views.property_detail, name='property_detail'),
 ]
 
 if settings.DEBUG:
