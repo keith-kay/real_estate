@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block content %}
+
 <div class="container-xxl py-3">
     <div class="container">
         {% if property.image_set.all %}
@@ -11,7 +12,7 @@
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                 <h2 class="mb-4 my-5 ">{{property.title}}</h2>
                 <div class="pb-3 pe-0" >
-                    <img class="img-fluid shadow-example" src="{{ first_image.image.url }}" alt="{{ property.title }}" style="height: 500px; width: 100%; object-fit: cover; border-radius: 4px;">
+                    <img class="img-fluid shadow-example" src="{{ first_image.image.url }}" alt="{{ property.title }}" style="height: 450px; width: 100%; object-fit: cover; border-radius: 4px;">
                 </div>
             </div>
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s" >
@@ -25,38 +26,100 @@
 </div>
 
 <!-- Search Start -->
-{% comment %} <div class="container-fluid bg-primary wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+<style>
+  .multi-item-carousel .carousel-inner > .item {
+    transition: 500ms ease-in-out left;
+  }
+
+  .multi-item-carousel .carousel-inner > .item.active.left {
+    left: -33%;
+  }
+
+  .multi-item-carousel .carousel-inner > .item.active.right {
+    left: 33%;
+  }
+
+  .multi-item-carousel .carousel-inner > .item.next {
+    left: 33%;
+  }
+
+  .multi-item-carousel .carousel-inner > .item.prev {
+    left: -33%;
+  }
+
+  @media all and (transform-3d), (-webkit-transform-3d) {
+    .multi-item-carousel .carousel-inner > .item {
+      transition: 500ms ease-in-out left, 500ms ease-in-out all;
+      backface-visibility: visible;
+      transform: none!important;
+    }
+  }
+
+  .multi-item-carousel .carousel-control.left,
+  .multi-item-carousel .carousel-control.right {
+    background-image: none;
+  }
+</style>
+ <div class="container-fluid bg-primary wow fadeIn" data-wow-delay="0.1s" style="padding: 35px; border-radius:5px;">
     <div class="container">
         <div class="row g-2">
-            <div class="col-md-10">
-                <div class="row g-2">
-                    <div class="col-md-4">
-                        <input type="text" class="form-control border-0 py-3" placeholder="Search Keyword">
-                    </div>
-                    <div class="col-md-4">
-                        <select class="form-select border-0 py-3">
-                            <option selected>Property Type</option>
-                            <option value="1">Property Type 1</option>
-                            <option value="2">Property Type 2</option>
-                            <option value="3">Property Type 3</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <select class="form-select border-0 py-3">
-                            <option selected>Location</option>
-                            <option value="1">Location 1</option>
-                            <option value="2">Location 2</option>
-                            <option value="3">Location 3</option>
-                        </select>
-                    </div>
-                </div>
+          <div class="carousel slide multi-item-carousel" id="theCarousel">
+            <div class="carousel-inner">
+              <div class="item active">
+                <div class="col-xs-4"><a href="#1"><img src="https://source.unsplash.com/300x300/?perth,australia" class="img-responsive"></a></div>
+              </div>
+              <div class="item">
+                <div class="col-xs-4"><a href="#1"><img src="https://source.unsplash.com/300x300/?fremantle,australia" class="img-responsive"></a></div>
+              </div>
+              <div class="item">
+                <div class="col-xs-4"><a href="#1"><img src="https://source.unsplash.com/300x300/?west-australia" class="img-responsive"></a></div>
+              </div>
+              <div class="item">
+                <div class="col-xs-4"><a href="#1"><img src="https://source.unsplash.com/300x300/?perth" class="img-responsive"></a></div>
+              </div>
+              <div class="item">
+                <div class="col-xs-4"><a href="#1"><img src="https://source.unsplash.com/300x300/?quokka,perth" class="img-responsive"></a></div>
+              </div>
+              <div class="item">
+                <div class="col-xs-4"><a href="#1"><img src="https://source.unsplash.com/300x300/?margaretriver,australia" class="img-responsive"></a></div>
+              </div>
+              <!-- add  more items here -->
+              <!-- Example item start:  -->
+              
+              <div class="item">
+                <div class="col-xs-4"><a href="#1"><img src="https://source.unsplash.com/300x300/?perth,australia&r=7" class="img-responsive"></a></div>
+              </div>
+              
+              <!--  Example item end -->
             </div>
-            <div class="col-md-2">
-                <button class="btn btn-dark border-0 w-100 py-3">Search</button>
-            </div>
-        </div>
+            <a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+            <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+          </div>
+        </div> 
     </div>
-</div> {% endcomment %}
+</div> 
+<script>
+  // Instantiate the Bootstrap carousel
+$('.multi-item-carousel').carousel({
+  interval: false
+});
+
+// for every slide in carousel, copy the next slide's item in the slide.
+// Do the same for the next, next item.
+$('.multi-item-carousel .item').each(function(){
+  var next = $(this).next();
+  if (!next.length) {
+    next = $(this).siblings(':first');
+  }
+  next.children(':first-child').clone().appendTo($(this));
+  
+  if (next.next().length>0) {
+    next.next().children(':first-child').clone().appendTo($(this));
+  } else {
+  	$(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+  }
+});
+</script>
 <!-- Search End -->
 
 <div class="container-xxl py-3">
@@ -87,6 +150,7 @@
                     }
                   </style>
                   <h3 class="mb-4 my-5 ">Site Plan</h3>
+                  {% if site_map_images.exists %}
                     <div class="accordion" id="accordionExample">
                         <div class="accordion-item custom-accordion-item">
                           <h2 class="accordion-header" id="headingOne">
@@ -96,40 +160,36 @@
                           </h2>
                           <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                              <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                              {% for site_map_image in site_map_images %}
+                                  <img class="img-fluid" src="{{ site_map_image.image.url }}" alt="{{ property.title }} - Site Map">
+                              {% endfor %}
                             </div>
                           </div>
                         </div>
-                        <div class="accordion-item custom-accordion-item">
+                      {% endif %}
+
+                      {% if aerial_view_images.exists %}
+                         <div class="accordion-item custom-accordion-item">
                           <h2 class="accordion-header" id="headingTwo">
                             <button class="accordion-button collapsed custom-accordion-item" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                              Accordion Item #2
+                              Ariel View
                             </button>
                           </h2>
                           <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                              <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                              {% for aerial_view_image in aerial_view_images %}
+                                  <img class="img-fluid" src="{{ aerial_view_image.image.url }}" alt="{{ property.title }} - Site Map">
+                              {% endfor %}
                             </div>
                           </div>
-                        </div>
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed custom-accordion-item" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                              Accordion Item #3
-                            </button>
-                          </h2>
-                          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                              <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                  
-            </div>
+                        </div> 
+                      {% endif %}
+                      </div> 
+                    </div>
         </div>
     </div>
 </div>
+
 {% endwith %}
 {% endif %}
 {% endblock %}

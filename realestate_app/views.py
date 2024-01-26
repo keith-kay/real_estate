@@ -27,10 +27,19 @@ def property_list(request):
 def property_detail(request, property_title):
     property_instance = get_object_or_404(Property, title=property_title)
 
-    # You can add more context data if needed
+    property_images = property_instance.image_set.all()
+    site_map_images = property_instance.image_set.filter(title='Site Map')
+    aerial_view_images = property_instance.image_set.filter(title='overview')
+    # Add more filters for additional titles as needed
+
     context = {
         'property': property_instance,
+        'property_images': property_images,
+        'site_map_images': site_map_images,
+        'aerial_view_images': aerial_view_images,
+        # Add more variables for additional titles as needed
     }
+
     return render(request, 'property_detail.html', context)
 
 
