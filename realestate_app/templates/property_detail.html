@@ -145,6 +145,20 @@
                           </div>
                         </div> 
                       {% endif %}
+                      {% if property.coordinates %}
+                         <div class="accordion-item custom-accordion-item">
+                          <h2 class="accordion-header" id="headingFive">
+                            <button class="accordion-button collapsed custom-accordion-item" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                              Location
+                            </button>
+                          </h2>
+                          <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                              {{ property.coordinates | safe }}
+                            </div>
+                          </div>
+                        </div> 
+                      {% endif %}
                       </div> 
                     </div>
         </div>

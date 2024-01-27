@@ -27,6 +27,7 @@ class Property(models.Model):
     size = models.CharField(max_length=200)
     payment_plan = models.CharField(max_length=200)
     amenities = models.TextField()
+    coordinates=models.CharField(max_length=600, unique=True, null=True)
     property_type = models.ForeignKey(Property_type, on_delete=models.CASCADE)
     is_available = models.BooleanField(default=True)
 
