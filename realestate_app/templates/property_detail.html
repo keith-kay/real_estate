@@ -10,7 +10,10 @@
             {% with first_image=property.image_set.first %}
         <div class="row g-5 align-items-center">
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                <h2 class="mb-4 my-5 ">{{property.title}}</h2>
+                <h2 class="mb-3">{{property.title}}</h2>
+                {% if property.price %}    
+                        <h5 class="text-primary">{{ property.price }}</h5>
+                {% endif %}
                 <div class="pb-3 pe-0" >
                     <img class="img-fluid shadow-example" src="{{ first_image.image.url }}" alt="{{ property.title }}" style="height: 450px; width: 100%; object-fit: cover; border-radius: 4px;">
                 </div>
@@ -30,10 +33,6 @@
 <!-- Search Start -->
 <div class="container-xxl py-5">
   <div class="container">
-      <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-          <h1 class="mb-3">Our Clients Say!</h1>
-          <p>ttto.</p>
-      </div>
       <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
         {% for property_image in property_images %}
           {% if property_image.title != 'Site Map' and property_image.title != 'overview' and property_image.title != '1stflr' and property_image.title != '2ndflr' and property_image.title != '3rdflr' %}
@@ -78,8 +77,9 @@
                       background-color: white;
                     }
                   </style>
-                  <h3 class="mb-4 my-5 ">Site Plan</h3>
+                  
                   {% if site_map_images.exists %}
+                  <h3 class="mb-4 my-5 ">Site Plan</h3>
                     <div class="accordion" id="accordionExample">
                         <div class="accordion-item custom-accordion-item">
                           <h2 class="accordion-header" id="headingOne">
@@ -145,7 +145,55 @@
                           </div>
                         </div> 
                       {% endif %}
-                      {% if property.coordinates %}
+                      {% if third_floors.exists %}
+                         <div class="accordion-item custom-accordion-item">
+                          <h2 class="accordion-header" id="headingFive">
+                            <button class="accordion-button collapsed custom-accordion-item" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                              3rd Floor
+                            </button>
+                          </h2>
+                          <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                              {% for third_floor in third_floors %}
+                                  <img class="img-fluid" src="{{ third_floor.image.url }}" alt="{{ property.title }} - Site Map">
+                              {% endfor %}
+                            </div>
+                          </div>
+                        </div> 
+                      {% endif %}
+                      {% if fourth_floors.exists %}
+                         <div class="accordion-item custom-accordion-item">
+                          <h2 class="accordion-header" id="headingSix">
+                            <button class="accordion-button collapsed custom-accordion-item" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                              4th Floor
+                            </button>
+                          </h2>
+                          <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                              {% for fourth_floor in fourth_floors %}
+                                  <img class="img-fluid" src="{{ fourth_floor.image.url }}" alt="{{ property.title }} - Site Map">
+                              {% endfor %}
+                            </div>
+                          </div>
+                        </div> 
+                      {% endif %}
+                      {% if fifth_floors.exists %}
+                         <div class="accordion-item custom-accordion-item">
+                          <h2 class="accordion-header" id="headingSeven">
+                            <button class="accordion-button collapsed custom-accordion-item" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                              5th Floor
+                            </button>
+                          </h2>
+                          <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                              {% for fifth_floor in fifth_floors %}
+                                  <img class="img-fluid" src="{{ fifth_floor.image.url }}" alt="{{ property.title }} - Site Map">
+                              {% endfor %}
+                            </div>
+                          </div>
+                        </div> 
+                      {% endif %}
+                      {% if not property.coordinates %}
                          <div class="accordion-item custom-accordion-item">
                           <h2 class="accordion-header" id="headingFive">
                             <button class="accordion-button collapsed custom-accordion-item" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
@@ -161,7 +209,61 @@
                       {% endif %}
                       </div> 
                     </div>
-        </div>
-    </div>
+            </div>
+    
+        </div> 
 </div>
+<div class="container-xxl py-3">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-5 wow fadeIn" data-wow-delay="0.1s">
+          {% if property.nearby %}
+              <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <h4 class="mb-4 my-5 " style="white-space: nowrap;">Nearby Places</h4>
+                <table class="table table-striped"style="width: 400px;">
+                  <thead>
+                    <th style="background: #0e2e50; color: #fff"> Nearby Places & Attractions</th>
+                  </thead>
+                  <tbody>
+                    {% for line in property.nearby|split_lines %}
+                      <tr>
+                        <td>{{ line }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+          {% endif %}
+      </div>
+      <div class="col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+              <h4 class="mb-4 my-5 mx-3">Size</h4>
+              {% if property.size%}
+              {% for size in property.size|split_lines %}
+              <ul style="white-space: nowrap;">
+                <li> {{size}}</li>
+              </ul>
+              {% endfor %}
+              {% endif %}
+            </div>
+      </div>
+      <div class="col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+        {% if property.price or property.payment_plan %}
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+              {% if property.price_details != 'empty' or property.payment_plan != 'N/A' %}
+                    <h4 class="mb-4 my-5">Price</h4>
+              {% if property.price_details != 'empty' %}
+                      
+                      <p class="" style="white-space: nowrap; font-size:17px">{{ property.price_details }}</p>
+                  {% endif %}
+                  {% if property.payment_plan != 'N/A' %}
+                      <p class="" style="white-space: nowrap; font-size:17px">{{ property.payment_plan }}</p>
+                  {% endif %}
+              {% endif %}
+            </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>  
 {% endblock %}

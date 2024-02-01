@@ -33,6 +33,8 @@ def property_detail(request, property_title):
     first_floors= property_instance.image_set.filter(title='1stflr')
     second_floors= property_instance.image_set.filter(title='2ndflr')
     third_floors= property_instance.image_set.filter(title='3rdflr')
+    fourth_floors= property_instance.image_set.filter(title='4thflr')
+    fifth_floors= property_instance.image_set.filter(title='5thflr')
     # Add more filters for additional titles as needed
 
     context = {
@@ -42,7 +44,9 @@ def property_detail(request, property_title):
         'aerial_view_images': aerial_view_images,
         'first_floors': first_floors,
         'second_floors': second_floors,
-        'third_floors': third_floors
+        'third_floors': third_floors,
+        'fourth_floors': fourth_floors,
+        'fifth_floors' : fifth_floors,
         # Add more variables for additional titles as needed
     }
 
