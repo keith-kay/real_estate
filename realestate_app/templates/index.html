@@ -34,6 +34,21 @@
 </head>
 
 <body>
+    <style>
+        .custom-button {
+            background-color: white;
+            border: 2px solid green;
+            color: green;
+            text-decoration: none;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .custom-button:hover {
+            background-color: green; /* Change background color on hover */
+            color: white; /* Change text color on hover */
+        }
+    </style>
     <div class="container-xxl bg-white p-0">
  
 
@@ -57,7 +72,7 @@
                             <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
                             <div class="dropdown-menu rounded-0 m-0">
                                 <a href="{% url 'property_list' %}" class="dropdown-item">Apartments</a>
-                                <a href="" class="dropdown-item">Lands</a>
+                                <a href="{% url 'land_list' %}" class="dropdown-item">Lands</a>
                             </div>
                         </div>
                         <a href="{% url 'contact_us' %}" class="nav-item nav-link">Contact</a>
@@ -220,8 +235,11 @@
                             {% endif %}
                             {% endfor %}
                             <div class="col-12 text-center wow fadeInUp dropdown" data-wow-delay="0.1s">
-                                <a href="" class="btn btn-primary py-3 px-5"  href="">Browse More Property</a>
+                                <button class="btn custom-button py-3 px-5"  href="" id="dropdown-btn">Browse More Property
+                                    <i class="fas fa-arrow-down"></i>
+                                </button>
                             </div>
+                            
                         </div>
                     </div>
                     {% comment %} <div id="tab-2" class="tab-pane fade show p-0">
@@ -667,6 +685,16 @@
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
+    <script>
+        document.getElementById("dropdown-btn").addEventListener("click", function() {
+            var dropdownContent = document.getElementById("dropdown-content");
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+            } else {
+                dropdownContent.style.display = "block";
+            }
+        });
+    </script>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -675,6 +703,7 @@
     <script src="{%static 'lib/easing/easing.min.js' %}"></script>
     <script src="{%static 'lib/waypoints/waypoints.min.js' %}"></script>
     <script src="{%static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
 
     <!-- Template Javascript -->
     <script src="{%static 'js/main.js' %}"></script>

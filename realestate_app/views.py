@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Property
+from .models import Property, Land
 from random import shuffle
 import requests
 
@@ -23,6 +23,19 @@ def contact_us(request):
 def property_list(request):
     properties= Property.objects.all()
     return render(request, 'properties.html', {'properties': properties} )
+
+def land_list(request):
+    lands= Land.objects.all()
+    return render(request, 'lands.html', {'lands': lands})
+
+def land_detail(request, land_title):
+    land_instance = get_object_or_404(Land, title=land_title)
+    land_images = land_instance.image_set.all()
+    context = {'land': land_instance,
+               'land_images': land_images
+               }
+    
+    return render(request, "land_detail.html", context)
 
 def property_detail(request, property_title):
     property_instance = get_object_or_404(Property, title=property_title)

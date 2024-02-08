@@ -9,21 +9,21 @@
         {% if property.image_set.all %}
             {% with first_image=property.image_set.first %}
         <div class="row g-5 align-items-center">
-            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                <h2 class="mb-3">{{property.title}}</h2>
-                {% if property.price %}    
-                        <h5 class="text-primary">{{ property.price }}</h5>
-                {% endif %}
-                <div class="pb-3 pe-0" >
-                    <img class="img-fluid shadow-example" src="{{ first_image.image.url }}" alt="{{ property.title }}" style="height: 450px; width: 100%; object-fit: cover; border-radius: 4px;">
-                </div>
+          <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+            <h2 class="mb-3">{{ property.title }}</h2>
+            {% if property.price %}
+                <h5 class="text-primary">{{ property.price }}</h5>
+            {% endif %}
+            <div class="pb-3 pe-0">
+                <img class="img-fluid shadow-example" src="{{ first_image.image.url }}" alt="{{ property.title }}" style="height: 450px; width: 100%; object-fit: cover; border-radius: 4px;">
             </div>
-            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s" >
-                <div class="" style="margin-top:120px; margin-left:20px;">
-                    <h4 class=" text-primary">Description</h4>
-                    <p class="" style="letter-spacing:1px; font-size:17px">{{ property.description|linebreaks }}</p>
-                </div>   
-            </div>
+        </div>
+        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s" id="description-container">
+            <div class="" style="margin-left:20px;">
+                <h4 class="text-primary">Description</h4>
+                <p class="" style="margin-left: 0 !important; letter-spacing: 1px; font-size: 17px">{{ property.description|linebreaks }}</p>
+            </div>   
+        </div>
         </div>
             {% endwith %}
         {% endif %}
@@ -324,7 +324,7 @@
   }
 </style>
 <div style="height: 100%; overflow-x: hidden; text-align: center">
-  {% for property_video in property.videos %}
+  {% for property.video in property.videos %}
     <div class="csslider infinity" id="slider1">
       {% for i in property.videos %}
         <input type="radio" name="slides" {% if forloop.first %}checked="checked" {% endif %} id="slides_{{ forloop.counter }}"/>
@@ -563,16 +563,31 @@
                     <h4 class="mb-4 my-5">Price</h4>
               {% if property.price_details != 'empty' %}
                       
-                      <p class="" style="margin-left:0; white-space: nowrap; font-size:17px">{{ property.price_details }}</p>
+                      <p class="" style="margin-left:0; white-space: nowrap; font-size:17px">{{ property.price_details|linebreaksbr }}</p>
                   {% endif %}
                   {% if property.payment_plan != 'N/A' %}
-                      <p class="" style="margin-left:0; white-space: nowrap; font-size:17px">{{ property.payment_plan }}</p>
+                      <p class="" style="margin-left:0; white-space: nowrap; font-size:17px">{{ property.payment_plan|linebreaksbr }}</p>
                   {% endif %}
               {% endif %}
             </div>
         {% endif %}
       </div>
+      <div class="container">
+        <button class="btn btn-primary py-3 px-4 mx-4" style="display: inline-block;"><i class="fas fa-phone" style="font-size:25px;"></i></button>
+        <div style="display: inline-block; vertical-align: top;">
+            <p class=" fw-bold" style="font-size:23px; color:#0E2E50; margin-left:0"> Contact Our Sales Team </p>
+            <p style="font-size:18px;margin-left:0"> +254 796 212 013 </p>
+        </div>
+    </div>
     </div>
   </div>
+ 
 </div>  
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var titleHeight = document.querySelector(".col-lg-6 h2").offsetHeight;
+    var descriptionContainer = document.getElementById("description-container");
+    descriptionContainer.style.marginTop = (titleHeight + 20) + "px";
+});
+</script>
 {% endblock %}
