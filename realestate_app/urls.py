@@ -10,7 +10,7 @@ urlpatterns = [
     path("property_list/", views.property_list, name="property_list"),
     path('property_detail/<str:property_title>/', views.property_detail, name='property_detail'),
     path('land_list/', views.land_list, name='land_list'),
-    path('land_detail/<str:land_title>/', views.land_detail, name='land_detail')
+    path('land_detail/<int:land_id>/', views.land_detail, name='land_detail')
 ]
 
 if settings.DEBUG:

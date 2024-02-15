@@ -50,37 +50,46 @@
         }
     </style>
     <div class="container-xxl bg-white p-0">
- 
 
         <!-- Navbar Start -->
         <div class="container-fluid nav-bar bg-transparent">
-            <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-                <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
-                    <div class=" p-2 me-2">
-                        <img class="img-fluid" src="{%static 'img/logo.jpg' %}" alt="Icon" style="width: 80px; height: 75px;">
-                    </div>
-                    <h1 class="m-0 text-primary">Riverside Multipurpose</h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto">
-                        <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
-                        <a href="{% url 'about_us' %}" class="nav-item nav-link">About</a>
-                        <div class="nav-item dropdown">
-                            <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="{% url 'property_list' %}" class="dropdown-item">Apartments</a>
-                                <a href="{% url 'land_list' %}" class="dropdown-item">Lands</a>
+            <style>
+                @media (max-width: 768px) {
+                    #tittle {
+                        display: none;
+                    }
+                }
+                
+            </style>
+                <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
+                    <div class="container-fluid">
+                        <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
+                            <div class="p-2 me-2">
+                                <img class="img-fluid" src="{% static 'img/logo.jpg' %}" alt="Icon" style="width: 80px; height: 75px;">
+                            </div>
+                            <h1 id="title" class="m-0 text-primary d-none d-lg-block">Riverside Multipurpose</h1>
+                        </a>
+                        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarCollapse">
+                            <div class="navbar-nav ms-auto">
+                                <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
+                                <a href="{% url 'about_us' %}" class="nav-item nav-link">About</a>
+                                <div class="nav-item dropdown">
+                                    <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
+                                    <div class="dropdown-menu rounded-0 m-0">
+                                        <a href="{% url 'property_list' %}" class="dropdown-item">Apartments</a>
+                                        <a href="{% url 'land_list' %}" class="dropdown-item">Lands</a>
+                                    </div>
+                                </div>
+                                <a href="{% url 'contact_us' %}" class="nav-item nav-link">Contact</a>
                             </div>
                         </div>
-                        <a href="{% url 'contact_us' %}" class="nav-item nav-link">Contact</a>
                     </div>
-                </div>
-            </nav>
+                </nav>
         </div>
-        <!-- Navbar End -->
+<!-- Navbar End -->
 
 
         <!-- Header Start -->
@@ -507,9 +516,17 @@
                             
                             <a class="btn btn-primary py-3 px-5" href="{% url 'about_us' %}" style="background:#292974; transition: background 0.3s;" onmouseover="this.style.background='#58b047'" onmouseout="this.style.background='#292974'">Learn more about us</a>    
                         </div>
-                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="col-lg-6 wow fadeIn " data-wow-delay="0.1s" id=" #hiddenDiv">
+                        <style>
+                            @media (max-width: 768px) {
+                                #hiddenImage {
+                                    display: none;
+                                }
+                            }
+                            
+                        </style>
                         <div class=" position-relative overflow-hidden p-5 pe-0">
-                            <img class="img-fluid shadow-example" src="{%static 'img/handshake.jpg' %}" alt="Icon" style="height: 400px; width:100%; border-radius: 5px;">
+                            <img id="hiddenImage" class="img-fluid shadow-example" src="{% static 'img/handshake.jpg' %}" alt="Icon" style="height: 400px; width:100%; border-radius: 5px;">    
                         </div>
                     </div>
                 </div>

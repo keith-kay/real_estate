@@ -28,8 +28,8 @@ def land_list(request):
     lands= Land.objects.all()
     return render(request, 'lands.html', {'lands': lands})
 
-def land_detail(request, land_title):
-    land_instance = get_object_or_404(Land, title=land_title)
+def land_detail(request, land_id):
+    land_instance = get_object_or_404(Land, pk=land_id)
     land_images = land_instance.image_set.all()
     context = {'land': land_instance,
                'land_images': land_images

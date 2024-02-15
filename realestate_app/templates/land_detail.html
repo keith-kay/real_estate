@@ -383,7 +383,7 @@
         {% endif %}
       </div>
       <div class="col-lg-4 wow fadeIn custom-height" data-wow-delay="0.1s">
-        {% if land.coordinates %}
+        {% if land.coordinates != 'N/A' %}
         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
           <h4 class="mb-4 my-5">Location</h4>
           {{ land.coordinates | safe }}
