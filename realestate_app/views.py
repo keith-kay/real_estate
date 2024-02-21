@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Property, Land
 from random import shuffle
+from .forms import ContactForm 
+from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
 import requests
 
 # Create your views here.
@@ -12,13 +15,22 @@ def index(request):
     shuffle(properties_list)
     #select 3 properties
     selected_properties = properties_list[:3]
-    return render(request, 'index.html', {'properties': selected_properties})
+    #get all lands
+    all_lands = Land.objects.all()
+    # convert queryset to list for shuffling
+    lands_list = list(all_lands)
+    # shuffle the list of lands
+    shuffle(lands_list)
+    # select 3 lands
+    selected_lands = lands_list[:3]
+    context= {
+        'properties': selected_properties,
+        'lands': selected_lands 
+    }
+    return render(request, 'index.html', context)
 
 def about_us(request):
     return render(request, 'about_us.html')
-
-def contact_us(request):
-    return render(request, 'contact.html')
 
 def property_list(request):
     properties= Property.objects.all()
@@ -64,6 +76,34 @@ def property_detail(request, property_title):
     }
 
     return render(request, 'property_detail.html', context)
+
+def contact_us(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            
+            # Compose the email message
+            email_body = f"Name: {name}\nEmail: {email}\nSubject: {subject}\nMessage: {message}"
+            
+            # Send the email
+            send_mail(
+                subject='Contact Form Submission',  # Email subject
+                message=email_body,  # Email message body
+                from_email=email,  # Sender's email address
+                recipient_list=['keithrhova@gmail.com'],  # Recipient email addresses
+                fail_silently=False,  # Raise an error if email sending fails
+            )
+            
+            # Redirect to a thank you page
+            return HttpResponseRedirect('/thank-you/')  # Adjust the URL as needed
+    else:
+        form = ContactForm()
+    
+    return render(request, 'contact.html', {'form': form})
 
 
     

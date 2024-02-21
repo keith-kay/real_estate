@@ -3,6 +3,9 @@
 {% load static %}
 
 {%block content%}
+<!-- Animate On Scroll-->
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 <style>
     @media (max-width: 768px) {
     .map-wrapper{
@@ -46,7 +49,7 @@
                 style="color:#292974; cursor: none; font-size: 30px;">Our Ethos</h2>
         </div>
         <div class="row my-5">
-            <div class="col-lg-6 col-sm-12">
+            <div class="col-lg-6 col-sm-12 mb-3" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
                 <div class="service p-4 p-sm-5 rounded-3 shadow" >
                     <div class="iconbox rounded-3">
                         <img src="{% static '/img/vision.png' %}" style="width:50px;height: 50px;">
@@ -55,7 +58,7 @@
                     <p style="font-size:20px;"> To be a leading general contractor and property management Company</p>
                 </div>
             </div>
-            <div class="col-lg-6 col-sm-12">
+            <div class="col-lg-6 col-sm-12 mb-3" data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine">
                 <div class="service p-4 p-sm-5 rounded-3 shadow">
                     <div class="iconbox rounded-3">
                         <img src="{% static 'img/target.png' %}" style="width:50px;height: 50px;">
@@ -64,7 +67,7 @@
                     <p style="font-size:20px;">To conduct business with integrity , fairness , and foccus on customer needs</p>
                 </div>
             </div>
-            <div class="col-lg-12 col-sm-12">
+            <div class="col-lg-12 col-sm-12 mb-3 mx-2" data-aos="fade-down"  data-aos-delay="300">
                 <div class="service p-4 p-sm-5 rounded-3 shadow my-5">
                     <div class="iconbox rounded-3">
                         <img src="{% static 'img/location.png' %}" style="width:50px;height: 50px;">
@@ -83,5 +86,8 @@
         </div>
     </div>
 </div>
-
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
 {%endblock%}
